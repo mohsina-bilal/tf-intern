@@ -1,0 +1,8 @@
+fastapi
+pydantic
+typing
+requests
+base64
+urllib.parse
+sys
+uvicorn

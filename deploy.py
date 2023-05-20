@@ -8,6 +8,8 @@ parser = argparse.ArgumentParser()
 parser.add_argument("--workspace_fqn", required=True, type=str)
 args = parser.parse_args()
 
+sfy.login(relogin=True)
+
 service = Service(
     name="fastapi",
     image=Build(

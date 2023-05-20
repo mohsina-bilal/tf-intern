@@ -1,5 +1,6 @@
 import argparse
 import logging
+import sfy
 from servicefoundry import Build, PythonBuild, Service, Resources, Port
 
 logging.basicConfig(level=logging.INFO)

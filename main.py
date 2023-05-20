@@ -1,15 +1,28 @@
+import subprocess
+import sys
+
+def install_library(library_name):
+    subprocess.check_call([sys.executable, "-m", "pip", "install", library_name])
+
+# Install required libraries
+required_libraries = ["fastapi", "pydantic", "requests"]
+for library in required_libraries:
+    install_library(library)
+
+# Continue with the rest of your code
 from fastapi import FastAPI
 from pydantic import BaseModel
 from typing import Any, Dict, Union
-import requests
 import base64
 from urllib.parse import urljoin
-import sys
+
 hp=("text-generation","zero-shot-classification","object-detection","token-class")
 mdu=("https://text-generation-intern-mohsina.demo1.truefoundry.com/","https://zero-shot-classification-intern-mohsina.demo1.truefoundry.com/","https://object-detection-intern-mohsina.demo1.truefoundry.com/","https://token-class-intern-mohsina.demo1.truefoundry.com/")
 app = FastAPI()
-hf_pipeline = hp[int(sys.argv[1])-1]
-model_deployed_url = mdu[int(sys.argv[1])-1]
+# hf_pipeline = hp[int(sys.argv[1])-1]
+# model_deployed_url = mdu[int(sys.argv[1])-1]
+hf_pipeline = "token-class"
+model_deployed_url = "https://token-class-intern-mohsina.demo1.truefoundry.com/"
 
 class Input(BaseModel):
     inputs: Any

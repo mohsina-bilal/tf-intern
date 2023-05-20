@@ -1,71 +1,54 @@
-# tf-intern
+FastAPI Model Inference Server
 
-FastAPI for Different Hugging Face Models
+This is a FastAPI application that provides an HTTP endpoint for running predictions using several machine learning models.
+Overview
 
-This repository contains a FastAPI server that acts as an interface to various deployed Hugging Face models such as text-generation, zero-shot-classification, object-detection, and token-classification.
-How to run the server
+This application supports four types of pipelines: text-generation, zero-shot-classification, object-detection, and token-classification. It converts input data into the v2 format and sends HTTP POST requests to the model servers to run the inference.
+Setup and Installation
 
-    Clone this repository.
+You can clone this repository to your local machine.
 
-    Navigate to the directory containing main.py.
-
-    Run the following command in your terminal to start the server. Replace N with the number corresponding to the model you want to use (1 - Text Generation, 2 - Zero Shot Classification, 3 - Object Detection, 4 - Token Classification):
+    First, you need to clone the repo using:
 
 bash
 
-python main.py N
+git clone https://github.com/<your-github-username>/<your-repo-name>.git
 
-The server will start running on http://localhost:8000.
-How to make predictions
+    Navigate into the folder:
 
-Use the /predict endpoint to make POST requests with the appropriate inputs for the chosen model. The input data formats for each model are as follows:
-Zero-shot Classification
+bash
 
-Request:
+cd <your-repo-name>
 
-json
+    You need to have Python 3.6+ installed on your machine. You can then install the dependencies using:
 
-{
-  "inputs": {
-    "sequence": "text_sequence",
-    "candidate_labels": ["label1", "label2", ..., "labelN"]
-  }
-}
+pip install -r requirements.txt
 
-Object Detection
+Usage
 
-Request:
+You can start the server using the command:
 
-json
+lua
 
-{
-  "inputs": "image.jpg"
-}
+uvicorn app:app --host 0.0.0.0 --port 8000
 
-Token Classification
+Once the server is running, you can send HTTP POST requests to the /predict endpoint to run inference on the models. The request body should be a JSON object with a single inputs key, whose value can be anything.
 
-Request:
+Here is an example using curl:
 
-json
+swift
 
-{
-  "inputs": "text_input"
-}
+curl -X POST "http://localhost:8000/predict" -H  "accept: application/json" -H  "Content-Type: application/json" -d "{\"inputs\":{\"sequence\":\"This is a test.\",\"candidate_labels\":[\"test\",\"exam\",\"check\"]}}"
 
-Text Generation
+The server will respond with the prediction results from the model server.
+Note
 
-Request:
+The application currently uses predefined model servers. If you want to use your own model servers, you need to modify the model_deployed_url and hf_pipeline variables in app.py.
 
-json
-
-{
-  "inputs": "text_input"
-}
-
-You can make these requests using a tool like curl, Postman, or any HTTP client in a programming language of your choice.
+If you encounter any issues, please open an issue on this GitHub repository.
 Contributing
 
-Please feel free to open an issue or a pull request if you have any suggestions or find any bugs.
+If you want to contribute to this project, please create a pull request. Any contributions, big or small, are welcomed and appreciated!
+License
 
-
-Note: Always remember to replace the model URL and HF pipeline variable with your own information in the main.py file.
+This project is open-sourced under the MIT License.

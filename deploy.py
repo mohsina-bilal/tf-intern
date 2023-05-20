@@ -1,6 +1,6 @@
 import argparse
 import logging
-from servicefoundry import Build, PythonBuild, Service, Resources, Port, sfy
+from servicefoundry import Build, PythonBuild, Service, Resources, Port, login
 
 logging.basicConfig(level=logging.INFO)
 
@@ -8,7 +8,7 @@ parser = argparse.ArgumentParser()
 parser.add_argument("--workspace_fqn", required=True, type=str)
 args = parser.parse_args()
 
-sfy.login(relogin=True)
+login(relogin=True)
 
 service = Service(
     name="fastapi",

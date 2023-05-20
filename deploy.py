@@ -25,8 +25,8 @@ service = Service(
         )
     ],
     resources=Resources(
-        cpu_request=0.5,
-        cpu_limit=1,
+        cpu_request=0.15,
+        cpu_limit=0.2,
         memory_request=1000,
         memory_limit=1500
     ),

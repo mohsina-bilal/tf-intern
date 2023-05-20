@@ -28,9 +28,9 @@ Usage
 
 You can start the server using the command:
 
-lua
 
-uvicorn app:app --host 0.0.0.0 --port 8000
+
+uvicorn app:app (already there on truefoundrys deployed link)
 
 Once the server is running, you can send HTTP POST requests to the /predict endpoint to run inference on the models. The request body should be a JSON object with a single inputs key, whose value can be anything.
 
@@ -43,6 +43,54 @@ curl -X POST "http://localhost:8000/predict" -H  "accept: application/json" -H  
 The server will respond with the prediction results from the model server.
 Note
 
+How to make predictions
+
+Use the /predict endpoint to make POST requests with the appropriate inputs for the chosen model. The input data formats for each model are as follows:
+Zero-shot Classification
+
+Request:
+
+json
+
+{
+  "inputs": {
+    "sequence": "text_sequence",
+    "candidate_labels": ["label1", "label2", ..., "labelN"]
+  }
+}
+
+Object Detection
+
+Request:
+
+json
+
+{
+  "inputs": "image.jpg"
+}
+
+Token Classification
+
+Request:
+
+json
+
+{
+  "inputs": "text_input"
+}
+
+Text Generation
+
+Request:
+
+json
+
+{
+  "inputs": "text_input"
+}
+
+You can make these requests using a tool like curl, Postman, or any HTTP client in a programming language of your choice.
+
 The application currently uses predefined model servers. If you want to use your own model servers, you need to modify the model_deployed_url and hf_pipeline variables in app.py.
 
 If you encounter any issues, please open an issue on this GitHub repository.
@@ -51,4 +99,4 @@ Contributing
 If you want to contribute to this project, please create a pull request. Any contributions, big or small, are welcomed and appreciated!
 License
 
-This project is open-sourced under the MIT License.
+

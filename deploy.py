@@ -12,14 +12,14 @@ service = Service(
     name="fastapi",
     image=Build(
         build_spec=PythonBuild(
-            command="uvicorn app:app --port 8000 --host localhost",
+            command="uvicorn app:app --port 8000 --host https://intern-mohsina-8000.demo1.truefoundry.com",
             requirements_path="requirements.txt",
         )
     ),
     ports=[
         Port(
             port=8000,
-            host="localhost"  # Replace with the appropriate host value
+            host="https://intern-mohsina-8000.demo1.truefoundry.com" 
         )
     ],
     resources=Resources(
